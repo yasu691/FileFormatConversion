@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-File Format Converter CLI Tool
+ファイル形式変換CLIツール
 
-A command-line tool for converting image and audio file formats.
-Supports common formats like PNG, JPEG, GIF, MP3, WAV, FLAC, and more.
+画像と音声ファイルの形式を変換するコマンドラインツールです。
+PNG、JPEG、GIF、MP3、WAV、FLACなどの一般的な形式をサポートしています。
 """
 
 import click
@@ -19,23 +19,23 @@ from converters.utils import get_supported_formats, validate_file
 @click.group()
 @click.version_option(version='1.0.0')
 def cli():
-    """File Format Converter - Convert image and audio files between different formats."""
+    """ファイル形式変換ツール - 画像と音声ファイルを異なる形式間で変換します。"""
     pass
 
 
 @cli.command('convert-image')
 @click.argument('input_file', type=click.Path(exists=True))
 @click.argument('output_format', type=str)
-@click.option('-o', '--output', type=str, help='Output file path (optional)')
-@click.option('-q', '--quality', type=int, help='Quality for JPEG/WebP (1-100)')
-@click.option('--info', is_flag=True, help='Show image information before conversion')
+@click.option('-o', '--output', type=str, help='出力ファイルパス（オプション）')
+@click.option('-q', '--quality', type=int, help='JPEG/WebPの品質（1-100）')
+@click.option('--info', is_flag=True, help='変換前に画像情報を表示')
 def convert_image(input_file: str, output_format: str, output: str, quality: int, info: bool):
-    """Convert an image file to a different format.
+    """画像ファイルを異なる形式に変換します。
     
-    INPUT_FILE: Path to the input image file
-    OUTPUT_FORMAT: Target format (png, jpg, jpeg, gif, bmp, tiff, webp)
+    INPUT_FILE: 入力画像ファイルのパス
+    OUTPUT_FORMAT: 対象形式 (png, jpg, jpeg, gif, bmp, tiff, webp)
     
-    Examples:
+    使用例:
         file-converter convert-image photo.png jpg
         file-converter convert-image image.jpg png -o converted.png
         file-converter convert-image photo.jpeg webp -q 80
@@ -45,15 +45,15 @@ def convert_image(input_file: str, output_format: str, output: str, quality: int
         
         if info:
             image_info = converter.get_image_info(input_file)
-            click.echo(f"\nImage Information:")
-            click.echo(f"  Format: {image_info['format']}")
-            click.echo(f"  Size: {image_info['width']}x{image_info['height']}")
-            click.echo(f"  Mode: {image_info['mode']}")
-            click.echo(f"  File Size: {image_info['file_size']}")
+            click.echo(f"\n画像情報:")
+            click.echo(f"  形式: {image_info['format']}")
+            click.echo(f"  サイズ: {image_info['width']}x{image_info['height']}")
+            click.echo(f"  モード: {image_info['mode']}")
+            click.echo(f"  ファイルサイズ: {image_info['file_size']}")
             click.echo()
         
         converter.convert(input_file, output_format, output, quality=quality)
-        click.echo("✓ Image conversion completed successfully!")
+        click.echo("✓ 画像変換が正常に完了しました！")
         
     except Exception as e:
         click.echo(f"❌ Error: {str(e)}", err=True)
@@ -63,17 +63,17 @@ def convert_image(input_file: str, output_format: str, output: str, quality: int
 @cli.command('convert-audio')
 @click.argument('input_file', type=click.Path(exists=True))
 @click.argument('output_format', type=str)
-@click.option('-o', '--output', type=str, help='Output file path (optional)')
-@click.option('-b', '--bitrate', type=str, help='Bitrate (e.g., 192k, 320k)')
-@click.option('-r', '--sample-rate', type=int, help='Sample rate in Hz (e.g., 44100, 48000)')
-@click.option('--info', is_flag=True, help='Show audio information before conversion')
+@click.option('-o', '--output', type=str, help='出力ファイルパス（オプション）')
+@click.option('-b', '--bitrate', type=str, help='ビットレート（例: 192k, 320k）')
+@click.option('-r', '--sample-rate', type=int, help='サンプルレート（Hz）（例: 44100, 48000）')
+@click.option('--info', is_flag=True, help='変換前に音声情報を表示')
 def convert_audio(input_file: str, output_format: str, output: str, bitrate: str, sample_rate: int, info: bool):
-    """Convert an audio file to a different format.
+    """音声ファイルを異なる形式に変換します。
     
-    INPUT_FILE: Path to the input audio file
-    OUTPUT_FORMAT: Target format (mp3, wav, flac, ogg, aac, m4a)
+    INPUT_FILE: 入力音声ファイルのパス
+    OUTPUT_FORMAT: 対象形式 (mp3, wav, flac, ogg, aac, m4a)
     
-    Examples:
+    使用例:
         file-converter convert-audio song.wav mp3
         file-converter convert-audio audio.mp3 flac -o high_quality.flac
         file-converter convert-audio music.wav mp3 -b 320k -r 48000
@@ -83,16 +83,16 @@ def convert_audio(input_file: str, output_format: str, output: str, bitrate: str
         
         if info:
             audio_info = converter.get_audio_info(input_file)
-            click.echo(f"\nAudio Information:")
-            click.echo(f"  Duration: {audio_info['duration_seconds']:.1f}s")
-            click.echo(f"  Sample Rate: {audio_info['frame_rate']}Hz")
-            click.echo(f"  Channels: {audio_info['channels']}")
-            click.echo(f"  Sample Width: {audio_info['sample_width']} bytes")
-            click.echo(f"  File Size: {audio_info['file_size']}")
+            click.echo(f"\n音声情報:")
+            click.echo(f"  再生時間: {audio_info['duration_seconds']:.1f}秒")
+            click.echo(f"  サンプルレート: {audio_info['frame_rate']}Hz")
+            click.echo(f"  チャンネル数: {audio_info['channels']}")
+            click.echo(f"  サンプル幅: {audio_info['sample_width']} バイト")
+            click.echo(f"  ファイルサイズ: {audio_info['file_size']}")
             click.echo()
         
         converter.convert(input_file, output_format, output, bitrate=bitrate, sample_rate=sample_rate)
-        click.echo("✓ Audio conversion completed successfully!")
+        click.echo("✓ 音声変換が正常に完了しました！")
         
     except Exception as e:
         click.echo(f"❌ Error: {str(e)}", err=True)

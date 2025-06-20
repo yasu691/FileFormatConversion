@@ -95,7 +95,7 @@ python file_converter.py batch-convert ./music mp3 --type audio -b 192k
 - pydub (音声処理)
 - click (CLI フレームワーク)
 
-## 例
+## 使用例
 
 ```bash
 # 高品質JPEG変換
@@ -110,6 +110,29 @@ python file_converter.py convert-image image.jpg png --info
 # バッチ変換で出力ディレクトリ指定
 python file_converter.py batch-convert ./input png --type image -o ./output
 ```
+
+## プロジェクト構成
+
+```
+file_converter.py          # メインCLIエントリーポイント
+converters/
+  __init__.py
+  image_converter.py       # 画像変換ロジック
+  audio_converter.py       # 音声変換ロジック
+  utils.py                # 共通ユーティリティ
+requirements.txt          # 依存関係
+setup.py                 # パッケージセットアップ
+README.md                # このファイル
+```
+
+## 特徴
+
+- **使いやすいCLI**: clickフレームワークによる直感的なコマンドライン操作
+- **包括的なエラーハンドリング**: 分かりやすいエラーメッセージと提案
+- **進捗表示**: ファイルサイズの変化と変換結果の表示
+- **バッチ処理**: 複数ファイルの一括変換に対応
+- **品質制御**: 形式に応じた品質・圧縮設定
+- **ファイル検証**: 入力ファイルの存在確認と形式チェック
 
 ## ライセンス
 

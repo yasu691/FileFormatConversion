@@ -5,7 +5,7 @@ from .utils import validate_file, get_file_format, create_output_path, format_fi
 
 
 class ImageConverter:
-    """Handles image format conversion using Pillow."""
+    """Pillowを使用した画像形式変換を処理するクラス。"""
     
     SUPPORTED_FORMATS = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif', 'webp']
     
@@ -19,7 +19,7 @@ class ImageConverter:
     
     def convert(self, input_path: str, output_format: str, output_path: Optional[str] = None, 
                 quality: Optional[int] = None, **kwargs) -> bool:
-        """Convert an image file to the specified format."""
+        """画像ファイルを指定された形式に変換します。"""
         
         if not validate_file(input_path):
             raise FileNotFoundError(f"Input file not found or not readable: {input_path}")
@@ -69,7 +69,7 @@ class ImageConverter:
             raise RuntimeError(f"Failed to convert image: {str(e)}")
     
     def get_image_info(self, file_path: str) -> Dict[str, Any]:
-        """Get information about an image file."""
+        """画像ファイルの情報を取得します。"""
         if not validate_file(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
         

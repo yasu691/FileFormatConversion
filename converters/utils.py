@@ -4,7 +4,7 @@ from typing import Optional, Tuple
 
 
 def validate_file(file_path: str) -> bool:
-    """Validate that a file exists and is readable."""
+    """ファイルが存在し、読み取り可能であることを検証します。"""
     if not os.path.exists(file_path):
         return False
     if not os.path.isfile(file_path):
@@ -15,12 +15,12 @@ def validate_file(file_path: str) -> bool:
 
 
 def get_file_format(file_path: str) -> str:
-    """Get the file format from the file extension."""
+    """ファイル拡張子からファイル形式を取得します。"""
     return Path(file_path).suffix.lower().lstrip('.')
 
 
 def create_output_path(input_path: str, output_format: str, output_path: Optional[str] = None) -> str:
-    """Create output file path based on input path and target format."""
+    """入力パスと対象形式に基づいて出力ファイルパスを作成します。"""
     if output_path:
         return output_path
     
@@ -30,14 +30,14 @@ def create_output_path(input_path: str, output_format: str, output_path: Optiona
 
 
 def get_supported_formats() -> Tuple[list, list]:
-    """Get lists of supported image and audio formats."""
+    """サポートされている画像と音声形式のリストを取得します。"""
     image_formats = ['png', 'jpg', 'jpeg', 'gif', 'bmp', 'tiff', 'tif', 'webp']
     audio_formats = ['mp3', 'wav', 'flac', 'ogg', 'aac', 'm4a']
     return image_formats, audio_formats
 
 
 def format_file_size(size_bytes: int) -> str:
-    """Format file size in human readable format."""
+    """ファイルサイズを人間が読みやすい形式でフォーマットします。"""
     if size_bytes == 0:
         return "0B"
     size_names = ["B", "KB", "MB", "GB"]

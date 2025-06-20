@@ -5,7 +5,7 @@ from .utils import validate_file, get_file_format, create_output_path, format_fi
 
 
 class AudioConverter:
-    """Handles audio format conversion using pydub."""
+    """pydubを使用した音声形式変換を処理するクラス。"""
     
     SUPPORTED_FORMATS = ['mp3', 'wav', 'flac', 'ogg', 'aac', 'm4a']
     
@@ -19,7 +19,7 @@ class AudioConverter:
     
     def convert(self, input_path: str, output_format: str, output_path: Optional[str] = None,
                 bitrate: Optional[str] = None, sample_rate: Optional[int] = None, **kwargs) -> bool:
-        """Convert an audio file to the specified format."""
+        """音声ファイルを指定された形式に変換します。"""
         
         if not validate_file(input_path):
             raise FileNotFoundError(f"Input file not found or not readable: {input_path}")
@@ -64,7 +64,7 @@ class AudioConverter:
             raise RuntimeError(f"Failed to convert audio: {str(e)}")
     
     def get_audio_info(self, file_path: str) -> Dict[str, Any]:
-        """Get information about an audio file."""
+        """音声ファイルの情報を取得します。"""
         if not validate_file(file_path):
             raise FileNotFoundError(f"File not found: {file_path}")
         
